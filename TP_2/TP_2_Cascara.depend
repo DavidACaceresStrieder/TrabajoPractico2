@@ -13,3 +13,18 @@
 	<conio.h>
 	"funciones.h"
 
+1466014835 source:c:\users\vcl\desktop\trabajopractico2\tp_2\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	<windows.h>
+	"funciones.h"
+
+1466013290 c:\users\vcl\desktop\trabajopractico2\tp_2\funciones.h
+
+1466013765 source:c:\users\vcl\desktop\trabajopractico2\tp_2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+

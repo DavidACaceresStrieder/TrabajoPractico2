@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
+#include <windows.h>
 
 #include "funciones.h"
 
@@ -29,53 +30,65 @@ void Inicializar(EPersona lista[]){
         lista[i].estado=0;
     }
 }
-void AgregarPersona(EPersona lista[]){
-    int i;
+int AgregarPersona(EPersona lista[]){
+    int i,auxint=-1;
+
     for(i=0;i<20;i++){
         if(lista[i].estado==0){
             break;
         }
+        if(i==20){
+            printf("Lista LLena");
+            return 0;
+        }
     }
+
+    system("cls");
     printf("Ingresar Nombre: \n");
     fflush(stdin);
     gets(lista[i].nombre);
-    lista[i].edad=-1;
+
+
     printf("Ingresar edad: \n");
-    while(lista[i].edad==-1){
-        scanf("%i",lista[i].edad);
-        if(lista[i].edad<0){
-            printf("Error:edad no valida, reingrese: \n");
-            lista[i].edad=-1;
+    while(auxint==-1){
+        scanf("%i",&auxint);
+        if(auxint>0 && auxint<110){
+            lista[i].edad=auxint;
         }
-        if(lista[i].edad>110){
+        else{
             printf("Error:edad no valida, reingrese: \n");
-            lista[i].edad=-1;
+            auxint=-1;
         }
     }
 
+
     printf("Ingresar DNI: \n");
-    lista[i].dni==-1;
-    while(lista[i].dni==-1){
-        scanf("%i",lista[i].dni);
-        if(lista[i].dni<14000000){
+    auxint=-1;
+    while(auxint==-1){
+        scanf("%i",&auxint);
+        if(auxint<14000000){
             printf("Error:edad no valida, reingrese: \n");
-            lista[i].dni=-1;
+            auxint=-1;
         }
-        if(lista[i].dni>99999999){
+        if(auxint>99999999){
             printf("Error:edad no valida, reingrese: \n");
-            lista[i].dni=-1;
+            auxint=-1;
         }
     }
+    lista[i].dni=auxint;
     lista[i].estado=1;
+    return 1;
 }
 
 void BorrarPersona(EPersona lista[]){
+
     char auxnombre[50];
     int i,val=0;
 
     printf("Ingrese el nombre de la persona a borrar: ");
     fflush(stdin);
     gets(auxnombre);
+
     for(i=0;i<20;i++){
         if(strcmp(auxnombre,lista[i].nombre)==0){
             val=1;
@@ -91,59 +104,76 @@ void BorrarPersona(EPersona lista[]){
 }
 
 void ImprimirGrafico(EPersona lista[]){
+
     int i,max=0,grup1=0,grup2=0,grup3=0;
+
     for(i=0;i<20;i++){
         if(lista[i].estado==1){
-            if(lista[i].edad<19){
+            if(lista[i].edad<=18){
                 grup1++;
             }
-            else{
-                if(lista[i].edad<35){
-                    grup2++;
-                }
-                else{
-                    grup3++;
-                }
+            if(lista[i].edad<=35 && lista[i].edad>18){
+                grup2++;
+            }
+            if(lista[i].edad>35){
+                grup3++;
             }
         }
     }
-    for(i=max;i>max;i--){
-        if(max<=grup1){
-            printf("*");
-        }
-        else{
-            printf("\t");
-        }
 
-        if(max<=grup2){
-            printf("*");
-        }
-        else{
-            printf("\t");
-        }
+    max=grup1;
 
-        if(max<=grup3){
-            printf("*");
-        }
-        else{
-            printf("\t \n");
-        }
+    if(grup2>max){
+        max=grup2;
+    }
+    if(grup3>max){
+        max=grup3;
     }
 
+
+    for(i=max;i>0;i--){
+
+        if(i<=grup1){
+            printf("*\t");
+        }
+        else{
+            printf("\t");
+        }
+
+        if(i<=grup2){
+            printf("*\t");
+        }
+        else{
+            printf("\t");
+        }
+
+        if(i<=grup3){
+            printf("*\n");
+        }
+        else{
+            printf("\n");
+        }
+    }
+    system("pause");
 }
 
 void ImprimirLista(EPersona lista[]){
+
     EPersona aux;
     int i,j;
+
     for(i=0;i<20;i++){
         for(j=i+1;j<19;j++){
-            if(strcmp(lista[i].nombre,lista[j].nombre==1)){
-                aux=lista[i];
-                lista[i]=lista[j];
-                lista[j]=aux;
+            if(lista[i].estado==1 && lista[j].estado==1){
+                if(strcmp(lista[i].nombre,lista[j].nombre!=0)){
+                    aux=lista[i];
+                    lista[i]=lista[j];
+                    lista[j]=aux;
+                }
             }
         }
     }
+
     for(i=0;i<20;i++){
         if(lista[i].estado==1){
             printf("Nombre: %s \n",lista[i].nombre);
@@ -152,4 +182,5 @@ void ImprimirLista(EPersona lista[]){
             printf("\n");
         }
     }
+    system("pause");
 }
