@@ -165,10 +165,17 @@ void ImprimirLista(EPersona lista[]){
     for(i=0;i<20;i++){
         for(j=i+1;j<19;j++){
             if(lista[i].estado==1 && lista[j].estado==1){
-                if(strcmp(lista[i].nombre,lista[j].nombre!=0)){
-                    aux=lista[i];
-                    lista[i]=lista[j];
-                    lista[j]=aux;
+                if(lista[i].edad==lista[j].edad){
+                    if(strcmp(lista[i].nombre,lista[j].nombre!=0)){
+                        aux=lista[i];
+                        lista[i]=lista[j];
+                        lista[j]=aux;
+                    }
+                    else{
+                        aux=lista[i];
+                        lista[i]=lista[j];
+                        lista[j]=aux;
+                    }
                 }
             }
         }
